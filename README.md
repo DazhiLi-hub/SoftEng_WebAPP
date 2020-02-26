@@ -5,7 +5,7 @@
 
 ### First Period Target:
 - Collecting data from Yahoo Finance
-- Stocks included:GOOG(Google), MSFT(Microsoft),AAPL(Apple),NVDA(NVDIA),BTC-USD(Bitcoin),AMZN(Amazon),OVTZ(Oclus Vison Tech.),IBM(IBM),AMD(AMD),INTC(Intel)
+- Stocks included:GOOG(Google), MSFT(Microsoft), AAPL(Apple), NVDA(NVDIA), BTC-USD(Bitcoin), AMZN(Amazon), OVTZ(Oclus Vison Tech.), IBM(IBM), AMD(AMD), INTC(Intel)
 - Utilized language: Python
 - Database: MongoDB(Non-relation)
 - Data transfered datatype: .json
