@@ -11,7 +11,7 @@ def history_data(stock,start):
 def realtime_data(stock):
     data=yf.download(tickers=stock,period="1d",interval="1m")
     data.head()
-    print(data.tail(2))
+    print(data)
 history_data("AAPL","2016,1,1")
 realtime_data("AAPL")
 sched=BlockingScheduler()
