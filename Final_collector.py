@@ -17,12 +17,12 @@ def history_data(stock, start):
     dir_long = "./" + stock + "_historical_data.json"
     with open(dir_long, "w") as f:
         json.dump(json_data, f)
-    print("File Written Successfully...")
+    print(stock+" History File Written Successfully...")
 
 
 def realtime_data():
     url_base = 'https://www.cnbc.com/quotes/?symbol='
-    company_name = ["GOOG", "MSFT"]
+    company_name = ["GOOG", "MSFT","AAPL","NVDA","BTC-USD","AMZN","OVTZ","OVTZ","AMD","INTC"]
     for name in company_name:
         url = url_base + name
         strhtml = requests.get(url)
@@ -45,19 +45,17 @@ def realtime_data():
         dir_short = "./" + name + "_realtime_data.json"
         with open(dir_short, "a") as f:
             json.dump(realtime, f, indent=4, sort_keys=True, default=str)
-            print(name + " File Written Successfully...")
+            print(name + "Realtime  File Written Successfully...")
 
 
 if __name__ == '__main__':
-    stocks = ['GOOG', 'MSFT']
-    history_data("MSFT","2018,1,1")
+    stocks = ["GOOG", "MSFT","AAPL","NVDA","BTC-USD","AMZN","OVTZ","OVTZ","AMD","INTC"]
     for stock in stocks:
         history_data(stock, "2018,1,1")
     sched = BlockingScheduler()
     sched.add_job(realtime_data, 'interval', minutes=1)
     sched.start()
 '''
-realtime_data("APPL")
 sched = BlockingScheduler()
 sched.add_job(realtime_data, 'interval', minutes=1, kwargs={"stock": "AAPL"})
 sched.start()
