@@ -11,7 +11,14 @@ def history_data(stock, start):
     start_time = datetime.datetime.strptime(start, "%Y,%m,%d")
     end = datetime.date.today()
     company = web.DataReader(stock, "yahoo", start_time, end)
-    company['Time']=company.index
+    time=[]
+    for i in company.index:
+        time.append(datetime.datetime.strftime(i,"%Y-%m-%d"))
+    company['Time']=time
+    print(company)
+    dict=company.set_index('Time').T.to_dict('dict')
+    print(dict)
+    '''
     json_data = company.to_json(orient='table')
     # print(company)
     # print(json_data)
@@ -19,7 +26,7 @@ def history_data(stock, start):
     with open(dir_long, "w") as f:
         json.dump(json_data, f)
     print(stock+" History File Written Successfully...")
-
+    '''
 def realtime_data():
     url_base = 'https://www.cnbc.com/quotes/?symbol='
     company_name = ["GOOG", "MSFT","AAPL","NVDA","BTC-USD","AMZN","OVTZ","IBM","AMD","INTC"]
@@ -49,12 +56,15 @@ def realtime_data():
 
 
 if __name__ == '__main__':
+    history_data("AAPL","2020,2,1")
+    '''
     stocks = ["GOOG", "MSFT","AAPL","NVDA","BTC-USD","AMZN","OVTZ","IBM","AMD","INTC"]
     for stock in stocks:
         history_data(stock, "2018,1,1")
     sched = BlockingScheduler()
     sched.add_job(realtime_data, 'interval', minutes=1,next_run_time=datetime.datetime.now())
     sched.start()
+    '''
 '''
 sched = BlockingScheduler()
 sched.add_job(realtime_data, 'interval', minutes=1, kwargs={"stock": "AAPL"})
