@@ -11,6 +11,7 @@ def history_data(stock, start):
     start_time = datetime.datetime.strptime(start, "%Y,%m,%d")
     end = datetime.date.today()
     company = web.DataReader(stock, "yahoo", start_time, end)
+    company['Time']=company.index
     json_data = company.to_json(orient='table')
     # print(company)
     # print(json_data)
@@ -18,7 +19,6 @@ def history_data(stock, start):
     with open(dir_long, "w") as f:
         json.dump(json_data, f)
     print(stock+" History File Written Successfully...")
-
 
 def realtime_data():
     url_base = 'https://www.cnbc.com/quotes/?symbol='
